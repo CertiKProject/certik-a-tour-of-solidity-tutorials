@@ -55,7 +55,7 @@ contract FundRaising {
   }
 }
 
-contract FundRaisingWithAllowance is FundRaising{
+contract DemocraticFundraising is FundRaising{
   struct Request {
     string description;
     uint value;
@@ -63,7 +63,7 @@ contract FundRaisingWithAllowance is FundRaising{
   }
     Request[] public requests;
   
-  constructor(uint _goal, uint _timeLimit) FundRaising(_goal, _timeLimit) public {}
+  constructor(uint _goal, uint _timeLimit) DemocraticFundraising(_goal, _timeLimit) public {}
   
   function request(string memory idea, uint value) public {
     require(msg.sender == owner, "only the owner can make requests to use the fund");
