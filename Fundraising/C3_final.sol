@@ -3,10 +3,6 @@ pragma solidity ^0.5.10;
 contract FundRaising {
 
   address payable owner;
-  uint public goal;
-  uint public endTime;
-  uint public totalContribution = 0;
-
   mapping(address=>uint) donations;
 
   constructor() public {
@@ -15,7 +11,6 @@ contract FundRaising {
 
   function add() public payable {
     donations[msg.sender] += msg.value;
-    totalContribution += msg.value;
   }
 
   function withdrawOwner() public {
