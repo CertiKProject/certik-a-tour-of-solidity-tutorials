@@ -29,7 +29,7 @@ contract FundRaising {
   function withdrawOwner() public {
     require(address(this).balance >= goal, "Fundraising not closed yet");
     require(msg.sender == owner, "You must be the owner");
-    emit OwnerWidthdraw(address(this).balance now);
+    emit OwnerWidthdraw(address(this).balance, now);
     owner.transfer(address(this).balance);
   }
 
