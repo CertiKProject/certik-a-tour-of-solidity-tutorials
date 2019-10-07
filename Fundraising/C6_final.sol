@@ -36,7 +36,7 @@ contract FundRaising {
     donations[msg.sender] = 0;
   }
   
-  function percentageComplete() public view (returns uint) {
+  function percentageComplete() public view returns (uint) {
     require(goal != 0, "goal is 0, cannot divide by 0");
     return 100 * (address(this).balance / goal);
   }
