@@ -5,6 +5,7 @@ contract FundRaising {
   uint public goal;
   uint public endTime;
   bool open = true;
+  address public topDonator;
 
   mapping(address=>uint) donations;
   
@@ -29,7 +30,7 @@ contract FundRaising {
   function withdrawOwner() public {
     require(address(this).balance >= goal, "Fundraising not closed yet");
     require(msg.sender == owner, "You must be the owner");
-    emit OwnerWidthdraw(address(this).balance, now);
+    emit OwnerWithdraw(address(this).balance, now);
     owner.transfer(address(this).balance);
   }
 
@@ -37,7 +38,7 @@ contract FundRaising {
     require(address(this).balance < goal, "Fundraising campaign was successful");
     require(now > endTime, "Fundraising campaign is still ongoing");
     msg.sender.transfer(donations[msg.sender]);
-    emit UserWidthdraw(msg.sender, donations[msg.sender], now);
+    emit UserWithdraw(msg.sender, donations[msg.sender], now);
     donations[msg.sender] = 0;
   }
   
