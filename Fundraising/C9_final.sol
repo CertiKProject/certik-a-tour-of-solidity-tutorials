@@ -4,7 +4,6 @@ contract FundRaising {
   address payable owner;
   uint public goal;
   uint public endTime;
-  uint public totalContribution = 0;
   bool open = true;
 
   mapping(address=>uint) donations;
@@ -81,13 +80,13 @@ contract DemocraticFundraising is FundRaising{
   }
   
   function checkAllowance(uint a) public view returns(bool) {
-    return requests[a].allowed > totalContribution/2;
+    return requests[a].allowed > address(this).balance/2;
   }
   
   function useRequested(uint a) public {
     require(msg.sender == owner, "only owner can use the fund");
     require(checkAllowance(a), "not allowed to use yet");
-    require(totalContribution >= goal, "can only use the funds when the goal is met");
+    require(address(this).balance >= goal, "can only use the funds when the goal is met");
     msg.sender.transfer(requests[a].value);
   }
 }

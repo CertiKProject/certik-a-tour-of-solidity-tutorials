@@ -16,7 +16,6 @@ contract FundRaising {
 
   function add() public payable {
     donations[msg.sender] += msg.value;
-    totalContribution += msg.value;
   }
 
   function withdrawOwner() public {

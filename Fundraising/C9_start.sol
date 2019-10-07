@@ -4,7 +4,6 @@ contract FundRaising {
   address payable owner;
   uint public goal;
   uint public endTime;
-  uint public totalContribution = 0;
   bool open = true;
 
   mapping(address=>uint) donations;

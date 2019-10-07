@@ -20,7 +20,6 @@ contract FundRaising {
       donators.push(msg.sender);
     }
     donations[msg.sender] += msg.value;
-    totalContribution += msg.value;
   }
 
   function withdrawOwner() public {
