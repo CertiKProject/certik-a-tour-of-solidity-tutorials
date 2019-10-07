@@ -3,7 +3,7 @@ pragma solidity ^0.5.11;
 contract HelloWorld {
 
   uint yourFavoriteNumber; 
-	address payable ownerAddress;
+  address payable ownerAddress;
 
   constructor() public {
     ownerAddress = msg.sender;

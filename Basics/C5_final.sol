@@ -4,7 +4,7 @@ contract HelloWorld {
 
   uint myFavoriteNumber;
   uint yourFavoriteNumber; 
-	address payable ownerAddress;
+  address payable ownerAddress;
 
   constructor(uint num) public {
     myFavoriteNumber = num;

@@ -2,7 +2,7 @@ pragma solidity ^0.5.11;
 
 contract HelloWorld {
 
-	uint public myFavoriteNumber = 88;
+  uint public myFavoriteNumber = 88;
   //define a new variable "yourFavoriteNumber" here 
       
   function myFavoriteNumberPlusYourFavoriteNumber() public view returns (uint) { 

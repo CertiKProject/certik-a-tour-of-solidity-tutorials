@@ -8,7 +8,7 @@ contract HelloWorld {
   }
     
   mapping(address => UserInfo) public userInfoTable; 
-	address payable ownerAddress;
+  address payable ownerAddress;
 
   constructor() public {
     ownerAddress = msg.sender;
