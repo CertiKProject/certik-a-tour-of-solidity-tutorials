@@ -23,7 +23,7 @@ contract FundRaising {
     if(donations[msg.sender] > donations[topDonator]) {
       topDonator = msg.sender;
     }
-    emit Donation(msg.value, msg.sender)l
+    emit Donation(msg.value, msg.sender);
   }
 
   function withdrawOwner() public {
