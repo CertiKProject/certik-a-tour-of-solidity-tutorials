@@ -49,7 +49,7 @@ contract FundRaising {
 }
 
 
-contract FundRaisingWithAllowance is FundRaising{
+contract DemocraticFundraising is FundRaising{
   struct Request {
     string description;
     uint value;
