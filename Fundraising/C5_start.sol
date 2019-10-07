@@ -33,6 +33,7 @@ contract FundRaising {
   function withdraw() public {
     for(uint i = 0; i < donators.length; i++) {
       donators[i].transfer(donations[donators[i]]);
+      donations[donators[i]] = 0;
     }
   } 
 }
