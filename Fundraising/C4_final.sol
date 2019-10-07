@@ -5,7 +5,6 @@ contract FundRaising {
   address payable owner;
   uint public goal;
   uint public endTime;
-  uint public totalContribution = 0;
 
   mapping(address=>uint) donations;
 
@@ -21,12 +20,12 @@ contract FundRaising {
   }
 
   function withdrawOwner() public {
-    require(totalContribution >= goal, "Fundraising not closed yet");
+    require(address(this).balance >= goal, "Fundraising not closed yet");
     require(msg.sender == owner, "You must be the owner");
     owner.transfer(address(this).balance);
   }
 
   function withdraw() public {
-
+    msg.sender.transfer(donations[msg.sender]);
   }
 }
