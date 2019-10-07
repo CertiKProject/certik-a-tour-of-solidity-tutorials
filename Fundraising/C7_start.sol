@@ -1,11 +1,11 @@
 pragma solidity ^0.5.10;
 
 contract FundRaising {
+
+  address payable owner;
   uint public goal;
   uint public endTime;
-  uint public totalContribution = 0;
-  address payable owner;
-  bool open = true;
+  address public topDonator;
 
   mapping(address=>uint) donations;
 
@@ -16,31 +16,25 @@ contract FundRaising {
   }
 
   function add() public payable {
-    require(open, "the campaign is finished");
-    require(msg.value > 0, "You need to send some ether");
     donations[msg.sender] += msg.value;
-    totalContribution += msg.value;
+    if(donations[msg.sender] > donations[topDonator]) {
+      topDonator = msg.sender;
+    }
   }
 
   function withdrawOwner() public {
-    require(totalContribution >= goal, "Fundraising not closed yet");
+    require(address(this).balance >= goal, "Fundraising not closed yet");
     require(msg.sender == owner, "You must be the owner");
-
-    open=false;
     owner.transfer(address(this).balance);
   }
 
   function withdraw() public {
-    require(block.number > endTime, "Fundraising not closed");
-    require(totalContribution < goal, "Cannot withdraw when fundraising was successful");
-    uint amount = donations[msg.sender];
-    totalContribution -= amount;
-    donations[msg.sender] = 0;
-    address(msg.sender).transfer(amount);
+    require(address(this).balance < goal, "Fundraising campaign was successful");
+    require(now > endTime, "Fundraising campaign is still ongoing");
+    msg.sender.transfer(donations[msg.sender]);
   }
-
-  function monitor() public view returns(uint) {
-    require(goal != 0, "goal is 0, cannot divide by 0");
-    return totalContribution * 100 / goal;
+  
+  function percentageComplete() public view (returns uint) {
+    return 100 * (address(this).balance / goal);
   }
 }
