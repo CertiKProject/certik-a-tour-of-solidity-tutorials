@@ -30,5 +30,6 @@ contract FundRaising {
     require(address(this).balance < goal, "Fundraising campaign was successful");
     require(now > endTime, "Fundraising campaign is still ongoing");
     msg.sender.transfer(donations[msg.sender]);
+    donations[msg.sender] = 0;
   }
 }
