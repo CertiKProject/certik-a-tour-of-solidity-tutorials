@@ -54,3 +54,7 @@ contract FundRaising {
     return totalContribution * 100 / goal;
   }
 }
+
+contract DemocraticFundraising is FundRaising {
+  // fill me in! :) 
+}
