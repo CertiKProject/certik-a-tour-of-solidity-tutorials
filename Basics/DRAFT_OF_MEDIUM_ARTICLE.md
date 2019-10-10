@@ -1,0 +1,61 @@
+*Note: The decision has been made to move the "infodump" in the first section to a Medium article. I'm just going to draft the Medium article here in this repo and this file can be deleted once the Medium article is published.*
+
+# Smart Contracts 101
+
+## Blockchain Beginnings 
+
+The history of blockchain begins with the first cryptocurrency: Bitcoin. Its creator, Satoshi Nakamoto, had a vision of a digital currency that is fully decentralized, meaning that no one party has control over its transfer, creation, or storage.
+
+To do this, he laid out a protocol for a peer-to-peer network of computers. When someone on the Bitcoin network wants to transfer Bitcoin to another user, they must notify the other users on the network and communicate to them their intent to make this transaction.
+
+According to the rules of the network, every computer participating in the network must store the complete history of Bitcoin transactions. It is as if each computer maintains their own accounting-book that they can use to keep track of how much Bitcoin all the other computers on the network have spent. This allows Bitcoin to maintain a transaction history without a centralized database that a single party has control over. In order to track the flow of the cryptocurrency accurately, these accounting-books must store identical information. However, due to the fact that networks are unreliable and that users might enter and leave the network at whim, it is not obvious how to keep everyone's accounting-books perfectly in sync.
+
+Blockchain is the solution to this problem. Instead of users writing transactions to their accounting-books one at a time, they write them in large batches called "blocks". A set of users called "miners" are responsible for creating these blocks. The miners listen to the network for users indicating that they would like to perform a Bitcoin transaction. The miner picks up these transactions and starts recording them in a block. After a certain amount of time (in Bitcoin, ten minutes, in Ethereum, ~15 seconds) a miner is allowed to publish a new block full of all the transactions that have occurred. When the miner publishes a block to the rest of the network, each user first ensures that all the transactions in it are valid according to a set of pre-defined rules (i.e. no one is spending money that they don't have, money is not being created out of thin air, etc.). If the block is valid, they add it to their ever-growing list of transactions. Hence the name blockchain - the users store transaction history in a database that is a chain of blocks.
+
+There is much more to discuss when it comes to blockchain and all the various subtleties that allow a cryptocurrency to be securely sent across this network. If you would like to learn more about how mining works, how a decentralized system can be resistance to attacks, and how Bitcoin uses cryptography to grant access to funds, or if you would simply like to understand the design decisions involved in depth, click here to read [CertiK's Intro to Bitcoin series](https://medium.com/certik/how-bitcoin-works-the-purpose-of-bitcoin-a1d48ae2b94d). But this very basic understanding should be sufficient to understand the environment in which cryptocurrency is transferred and in which smart contracts are run.
+
+To slightly reiterate:
+
+- A blockchain is a database that exists in identical copies in computers all across the world.
+
+- When a user wants to make a transaction on a blockchain, she will have to send it out and wait for a miner to publish it in a block. For a block to be valid, it must adhere to a set of rules that all parties on the network agree to. Once that block is published,the user's transaction will be added to the blockchain and thus included in the transaction history of the network.
+
+- Transactions cannot be deleted or reversed, they are in the blockchain history forever.
+
+## Ethereum and Smart Contracts
+
+Let's take a step back and ask ourselves: what if we used this system for more than just sending payments around? What we've described here is a sort of mechanism for globally agreeing on a set of information and on rules to change that information.
+
+In Bitcoin, the set of information that we are tracking is the wealth in Bitcoin of every user on the Bitcoin network. The rules for changing that information are pretty simple: no one can spend anyone else's money, no one can spend money they don't have, etc.
+
+But there is no reason that blockchain is limited to simple money transfers. In theory, the information we're storing can be anything we want, and the rules for modifying it can be anything we want as well.
+
+Consider a standard computer program that begins with a certain storage state, accepts user input, then modifies the state based on running the user input through a predetermined set of instructions.
+
+Any program like this could be "blockchain-ified". The state in question could be represented on the blockchain. A blockchain transaction could serve as the input to the program. The instructions that represent the program could be communicated to each miner and user on the blockchain network, thus allowing them to update to the new state based on the latest set of transactions.
+
+In Bitcoin, the state we are trying to update is the set of account balances. A Bitcoin transaction is the user input. The account balances will then be modified by subtracting the transaction amount from the spender's balance and transfering it to the receiver.
+
+(Note that in actuality the blockchain itself is simply a list of transactions - the state itself e.g. the balances of all accounts in Bitcoin is not written to this list. Each computer on the network stores this type of information locally. But in a sense, the state exists on the blockchain, beacuse given a complete list of transactions, any user can derive the state using the known rules of the network.)
+
+Ethereum was invented by Vitalik Buterin, a Bitcoin enthusiast who advocated for the use of "smart contracts" in Bitcoin. When the Bitcoin community rejected his proposal, he decided to create his own alternative blockchain system in which smart contracts are possible.
+
+A smart contract is a program that allows us to deterministically program the flow of currency in pre-defined ways.
+
+Imagine an actual legal contract between a group of three people, Amy, Bill, and Chris. This contract reads "If Bill has paid Amy $1000 by August 13th, then Amy will pay $2000 to Chris. Otherwise Amy will not pay Chris."
+
+When you think about it, this is a sort of "program" for deterministically transfering money based on a certain set of conditions, enforced by the law. A smart contract is the same thing, but enforced by a machine.
+
+Since, as we described, blockchain technology allows us to specify any program we want to determine the state transfer of cryptocurrency, blockchain makes smart contracts possible.
+
+Ethereum enables users to publish whatever smart contracts they want onto the blockchain and use these smart contracts to dictate the flow of future monetary transfers.
+
+When you publish a smart contract, you must write an Ethereum transaction with the contract's code in it. Once your transaction is approved, the Ethereum contract becomes part of the state of the blockchain - forever! 
+
+On Ethereum, both users and uploaded smart contracts have "addresses" that they are referenced by. Anyone can send cryptocurrency to whatever address they want. If a user is sent cryptocurrency, he is then in control of where he wants to send it next. If a smart contract is sent cryptocurrency, the flow of the cryptocurrency will be determined by the smart contract's code. The code will decide if the cryptocurrency ends up being paid to another user, refunded, or remaining in the smart contract forever. You can think of a smart contract as a sort of "robot account" that pays people in programmed ways and cannot be turned off.
+
+In Ethereum, transactions do not just contain simple money transfers. A "transaction" in Ethereum can include the publishing of a new smart contract, or an interaction with an existing smart contract. Smart contracts will expose certain functions that allow end users to interact with them. When a user wants to call a function, they will publish a transaction on the blockchain communicating the name of the function they want to call and its parameters. When a transaction with a function call is mined and published, each computer on the Ethereum network will run the function in the smart contract to the application's state in a predictable way, performing whatever monetary transfers and other changes to state variables the code describes.
+
+By the way, just because these applications are called "contracts" doesn't mean they can only do things that resemble contracts in the real world. Anything is possible here, you can code whatever programs you want! Apps published on Ethereum include games, auctions, decentralized exchanges, token sales, and much more.
+
+If this is not quite making sense yet, the best way is to start writing smart contracts yourself! You can easily get started writing smart contracts using Ethereum's Solidity language using just basic programming knowledge. [We recommend CertiK's Solidity Tour, which we believe to be the best Solidity tutorial series available.](https://solidity-tour.certik.org) You will be guided through a number of real-world use cases for Ethereum contracts. By the end you will be ready to publish your own and tell the world you are a blockchain developers! 
