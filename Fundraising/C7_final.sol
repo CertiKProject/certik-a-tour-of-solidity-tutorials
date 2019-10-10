@@ -20,8 +20,8 @@ contract FundRaising {
 
   function add() public payable {
     donations[msg.sender] += msg.value;
-    if(donations[msg.sender] > donations[topDonator]) {
-      topDonator = msg.sender;
+    if(donations[msg.sender] > donations[topDonor]) {
+      topDonor = msg.sender;
     }
     emit Donation(msg.value, msg.sender);
   }

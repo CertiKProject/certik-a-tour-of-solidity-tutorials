@@ -5,7 +5,7 @@ contract FundRaising {
   address payable owner;
   uint public goal;
   uint public endTime;
-  address public topDonator;
+  address public topDonor;
 
   mapping(address=>uint) donations;
 
@@ -17,8 +17,8 @@ contract FundRaising {
 
   function add() public payable {
     donations[msg.sender] += msg.value;
-    if(donations[msg.sender] > donations[topDonator]) {
-      topDonator = msg.sender;
+    if(donations[msg.sender] > donations[topDonor]) {
+      topDonor = msg.sender;
     }
   }
 

@@ -28,7 +28,7 @@ contract HelloWorld {
   }
   
   function setYourFavoriteNumber(uint a) public payable needsMoney(1 ether) {
-    //check to see if user exists yet 
+    // check to see if user exists yet 
     if(userInfoTable[msg.sender].indexNumber == 0) {
       //if not add them to the array
       userList.push(msg.sender);
@@ -58,9 +58,10 @@ contract HelloWorld {
     //HINT 2: you will need to delete data from the middle of an array,
     //and then remove the "gap". is there a way to do this without using 
     //a for loop, if we don't care about preserving the order?
-    uint i = userInfoTable[msg.sender].indexNumber;
+    uint i = userInfoTable[msg.sender].indexNumber - 1;
     userList[i] = userList[userList.length-1];
     delete userList[userList.length-1];
-    userInfoTable[userList[i]].indexNumber = i;
+    userInfoTable[userList[i]].indexNumber = i+1;
+    userList.length--;
   }
 }
