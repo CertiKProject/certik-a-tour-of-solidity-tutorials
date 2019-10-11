@@ -4,10 +4,10 @@ contract UintTest {
   uint256 a;
   uint8 b;
 
-  function geta() public view returns(uint256) {
+  function geta() public returns(uint256) {
     return a;
   }
-  function getb() public view returns(uint8) {
+  function getb() public returns(uint8) {
     return b;
   }
 

@@ -4,27 +4,27 @@ contract StringTest {
   string a = "fsdf€bÁ";
   bytes32 b = "fsdf€bÁ";
 
-  function getbp() public view returns(bytes32) {
+  function getbp() public returns(bytes32) {
     return b;
   }
 
-  function getbe() external view returns(bytes32) {
+  function getbe() external returns(bytes32) {
     return b;
   }
 
-  function getbi() internal view returns(bytes32) {
+  function getbi() internal returns(bytes32) {
     return b;
   }
 
-  function getbpr() private view returns(bytes32) {
+  function getbpr() private returns(bytes32) {
     return b;
   }
 
-  function getbii() public view returns(bytes32) {
+  function getbii() public returns(bytes32) {
     return getbi();
   }
 
-  function getbpri() public view returns(bytes32) {
+  function getbpri() public returns(bytes32) {
     return getbpr();
   }
 }
