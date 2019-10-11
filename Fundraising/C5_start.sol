@@ -7,7 +7,7 @@ contract FundRaising {
   uint public endTime;
 
   mapping(address=>uint) donations;
-  address payable[] donators; 
+  address payable[] donors; 
 
   constructor(uint _goal, uint _timelimit) public {
     owner = msg.sender;
@@ -17,7 +17,7 @@ contract FundRaising {
 
   function add() public payable {
     if(donations[msg.sender] == 0) {
-      donators.push(msg.sender);
+      donors.push(msg.sender);
     }
     donations[msg.sender] += msg.value;
   }
@@ -30,9 +30,9 @@ contract FundRaising {
   
   //WRONG!! Don't do this!!
   function withdraw() public {
-    for(uint i = 0; i < donators.length; i++) {
-      (donators[i]).transfer(donations[donators[i]]);
-      donations[donators[i]] = 0;
+    for(uint i = 0; i < donors.length; i++) {
+      (donors[i]).transfer(donations[donors[i]]);
+      donations[donors[i]] = 0;
     }
   } 
 }
