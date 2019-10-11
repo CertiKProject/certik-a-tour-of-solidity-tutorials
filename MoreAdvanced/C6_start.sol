@@ -6,7 +6,7 @@ contract WealthShares {
   event Ints(uint, uint, uint, uint);
 
   function buyShares(uint numShares) public payable {
-    require(msg.value/sharePrice >= numShares, "buyShares failed: Not enough Ether sent to buy the shares");
+    require(msg.value/sharePrice >= numShares, "buyShares failed: Not enough  ether sent to buy the shares");
     shares[msg.sender] = safeAdd(shares[msg.sender], numShares);
   }
   
