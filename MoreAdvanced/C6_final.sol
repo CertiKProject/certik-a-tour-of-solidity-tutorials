@@ -7,7 +7,7 @@ contract WealthShares {
   event Ints(uint, uint, uint, uint);
 
   function buyShares(uint numShares) public payable {
-    require(msg.value/sharePrice >= numShares, "buyShares failed: Not enough  ether sent to buy the shares");
+    require(msg.value/sharePrice >= numShares, "buyShares failed: Not enough ether sent to buy the shares");
     shares[msg.sender] = safeAdd(shares[msg.sender], numShares);
   }
   
@@ -102,10 +102,10 @@ contract HackerSimulation {
     vuln.divideShares(2 ** 255, recipients);
     
     /*
-      Now that we own a gargantuan amount of shares, we simply convert them to  ether.
+      Now that we own a gargantuan amount of shares, we simply convert them to ether.
       Use 11 as the parameter to extract both the 100 ether originally deposited in the contract 
-      and the 10  ether we just put in.
-      If we try to take any more  ether than is in the contract, the function will revert
+      and the 10 ether we just put in.
+      If we try to take any more ether than is in the contract, the function will revert
     */
     vuln.cashOut(11);
   }
